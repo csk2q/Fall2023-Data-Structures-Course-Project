@@ -31,8 +31,11 @@ int main()
 
 	std::cout << "Hello files!\n";
 
-	//string wordsFile = "/Users/Shared/Test Files/words_alpha.txt"; //Mac
-	string wordsFile = "../../Data/words_alpha.txt"; //Windows
+#if __APPLE__ || __MACH__
+	string wordsFile = "/Users/Shared/Test Files/words_alpha.txt"; //Mac
+#else
+    string wordsFile = "../../Data/words_alpha.txt"; //Windows
+#endif
 
 	if (!filesystem::exists(wordsFile))
 	{
