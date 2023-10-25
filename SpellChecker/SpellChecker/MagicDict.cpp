@@ -102,18 +102,18 @@ bool MagicDict::isValidWord(string word)
 		return true;
 	}
 
-	for (int i = 0; i < wordLength; i++)
+	for (int i = 0; i < wordLength - 1; i++)
 	{
 		if (!isValidLetter(i, word[i], word[i + 1]))
 			return false;
-		if (i == wordLength - 1)
+		if (i == wordLength - 2)
 			return isWordEnd(i, word[i], word[i + 1]);
 	}
 
 	throw std::runtime_error("An unknown problem has occurred when checking if \"" + word + "\" is spelled correctly.");
 }
 
-bool MagicDict::isValidLetter(int depth, char parentLetter, char childLetter)
+bool MagicDict::isValidLetter(int depthOfParent, char parentLetter, char childLetter)
 {
 	if (!isalpha(parentLetter) || !isalpha(childLetter))
 		return false;
@@ -121,10 +121,10 @@ bool MagicDict::isValidLetter(int depth, char parentLetter, char childLetter)
 	int parent = letterToIndex(parentLetter);
 	int child = letterToIndex(childLetter);
 
-	return wordArray[depth][parent][child];
+	return wordArray[depthOfParent][parent][child];
 }
 
-bool MagicDict::isWordEnd(int depth, char parentLetter, char childLetter)
+bool MagicDict::isWordEnd(int depthOfParent, char parentLetter, char childLetter)
 {
 	if (!isalpha(parentLetter) || !isalpha(childLetter))
 		return false;
@@ -132,5 +132,6 @@ bool MagicDict::isWordEnd(int depth, char parentLetter, char childLetter)
 	int parent = letterToIndex(parentLetter);
 	int child = letterToIndex(childLetter);
 
-	return wordArray[depth][parent][child + 26];
+	//TODO DEBUG : wordArray[3][4][30] for tree
+	return wordArray[depthOfParent + 1][parent][child + 26];
 }

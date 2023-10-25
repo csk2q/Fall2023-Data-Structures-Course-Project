@@ -12,22 +12,20 @@ using namespace std;
 
 int main()
 {
-	for (int i = 65; i < 65 + 26; i++)
-	{
-		char letter = i;
-		cout << letter;
-	}
-	cout << "\n";
+	//for (int i = 65; i < 65 + 26; i++)
+	//{
+	//	char letter = i;
+	//	cout << letter;
+	//}
+	//cout << "\n";
 
-	string word = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	for (int i = 0; i < word.length(); i++)
-	{
-		int letter = word[i];
-		cout << letter << " ";
-	}
-	cout << "\n";
-
-
+	//string word = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	//for (int i = 0; i < word.length(); i++)
+	//{
+	//	int letter = word[i];
+	//	cout << letter << " ";
+	//}
+	//cout << "\n";
 
 	std::cout << "Hello files!\n";
 

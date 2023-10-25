@@ -22,7 +22,7 @@ inline void rtrim(std::string& s)
 {
 	int i = s.length();
 	int counter = 0;
-	while (!isalpha(s[--i]))
+	while (i > 0 && !isalpha(s[--i]))
 		counter++;
 	s = s.substr(0, s.length() - counter);
 }
