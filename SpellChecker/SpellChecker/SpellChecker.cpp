@@ -34,7 +34,7 @@ int main()
 #if __APPLE__ || __MACH__
 	string wordsFile = "/Users/Shared/Test Files/words_alpha.txt"; //Mac
 #else
-    string wordsFile = "../../Data/words_alpha.txt"; //Windows
+	string wordsFile = "../../Data/words_alpha.txt"; //Windows
 #endif
 
 	if (!filesystem::exists(wordsFile))
