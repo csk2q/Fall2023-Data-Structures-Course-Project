@@ -5,19 +5,19 @@
 
 using namespace std;
 
-MagicDict::MagicDict(vector<string> words, int maxWordLength) : maxWordLength(maxWordLength)
+MagicDict::MagicDict(const vector<string>& words, int maxWordLength) : maxWordLength(maxWordLength)
 {
 	//Depth array (max word length)
 	wordArray = new bool** [maxWordLength - 1];
 	for (int i = 0; i < maxWordLength; i++)
 	{
-		//Parent array (26)
+		//Parent array (LETTERS_IN_ALPHABET)
 		wordArray[i] = new bool* [LETTERS_IN_ALPHABET];
 		for (int j = 0; j < LETTERS_IN_ALPHABET; j++)
 		{
-			//Child array (26 + 26)  isValidLetter & isWordEnd
-			wordArray[i][j] = new bool[LETTERS_IN_ALPHABET];
-			for (int k = 0; k < LETTERS_IN_ALPHABET; k++)
+			//Child array (LETTERS_IN_ALPHABET + LETTERS_IN_ALPHABET)  isValidLetter & isWordEnd
+			wordArray[i][j] = new bool[LETTERS_IN_ALPHABET * 2];
+			for (int k = 0; k < LETTERS_IN_ALPHABET * 2; k++)
 			{
 				wordArray[i][j][k] = false;
 			}
@@ -29,12 +29,40 @@ MagicDict::MagicDict(vector<string> words, int maxWordLength) : maxWordLength(ma
 	//for (int i = 0; i < LETTERS_IN_ALPHABET; i++)
 	//	singleLetterArray[0] = false;
 
+	//Load words into array
 	for (const string& word : words)
 	{
 		addWord(word);
 	}
 
-	//TODO load words into array
+	//TODO output array to file or std out?
+    
+    ofstream myfile;
+    myfile.open ("array.txt");
+    for (int i = 0; i < maxWordLength - 1; ++i)
+    {
+        myfile << "Depth: " << i << "\n";
+        myfile << "  ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ\n";
+        for (int j = 0; j < LETTERS_IN_ALPHABET; ++j)
+        {
+            myfile << (char)(j + 65) << " ";
+            for (int k = 0; k < LETTERS_IN_ALPHABET * 2; ++k)
+            {
+                if (wordArray[i][j][k])
+                myfile << "T";
+                else
+                    myfile << "-";
+            }
+            myfile << "\n";
+        }
+    }
+//    myfile << "Writing this to a file.\n";
+    myfile.close();
+}
+
+MagicDict::~MagicDict()
+{
+	//TODO dealocate wordArray.
 }
 
 
@@ -62,7 +90,20 @@ bool MagicDict::addWord(string word)
 			int parent = letterToIndex(word[i]);
 			int child = letterToIndex(word[i + 1]);
 
+			//Add parent-child letter link
 			wordArray[i][parent][child] = true;
+            
+   
+
+			//Set end of word 
+			if(i == wordLength - 2)
+            {
+                wordArray[i][parent][child + LETTERS_IN_ALPHABET] = true;
+                
+                if(i == 3 && parent == 0 && child == 1)
+                    cout << "break\n";
+            }
+
 		}
 	}
 
@@ -133,5 +174,5 @@ bool MagicDict::isWordEnd(int depthOfParent, char parentLetter, char childLetter
 	int child = letterToIndex(childLetter);
 
 	//TODO DEBUG : wordArray[3][4][30] for tree
-	return wordArray[depthOfParent + 1][parent][child + 26];
+	return wordArray[depthOfParent][parent][child + LETTERS_IN_ALPHABET];
 }

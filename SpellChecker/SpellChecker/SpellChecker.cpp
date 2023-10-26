@@ -46,6 +46,7 @@ int main()
 	//string rawText = Utils::readAllText(file);
 	string line;
 	int maxWordLength = 0;
+    string longestWord = "";
 	while (std::getline(file, line, '\n'))
 	{
 		//cout << line + "\n";
@@ -54,8 +55,12 @@ int main()
 			break;
 		words.push_back(line);
 		if (lineLength > maxWordLength)
-			maxWordLength = lineLength;
+        {
+            maxWordLength = lineLength;
+            longestWord = line;
+        }
 	}
+    cout << longestWord << "\n";
 	file.close();
 
 	MagicDict MDict(words, maxWordLength);

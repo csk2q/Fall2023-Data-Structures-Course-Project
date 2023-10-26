@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-//Implementation based off of MagicDict as discribed here: https://www.freecodecamp.org/news/finding-the-balance-between-time-and-memory-complexity-an-illustrated-example-4845ab7afadd/
+//Implementation based off of MagicDict as described here: https://www.freecodecamp.org/news/finding-the-balance-between-time-and-memory-complexity-an-illustrated-example-4845ab7afadd/
 class MagicDict
 {
 	//--Variables--//
@@ -22,7 +22,8 @@ private:
 	//--Methods--//
 
 public:
-	MagicDict(vector<string> words, int maxWordLength);
+	MagicDict(const vector<string>& words, int maxWordLength);
+	~MagicDict();
 	bool isValidWord(string word);
 
 	//Returns true if successful. False if word is too long.
