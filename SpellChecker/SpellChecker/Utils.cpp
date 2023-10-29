@@ -27,5 +27,37 @@ inline void rtrim(std::string& s)
 	s = s.substr(0, s.length() - counter);
 }
 
+inline void ltrim(std::string& s)
+{
+    int i = 0;
+    for (; i < s.length(); i++)
+        if (isalpha(s[i]))
+            break;
+
+    s = s.substr(i);
+}
+
+static void trim(std::string& s)
+{
+    rtrim(s);
+    ltrim(s);
+}
+
+int letterToIndex(char letter)
+{
+    int offset = 65;
+    int index = std::toupper(letter);
+    index -= offset;
+    
+    //If letter is not a capital letter throw an error
+    if (index < 0 || index > 90)
+        throw invalid_argument("Non-alpha char passed to MagicDict::letterToIndex!");
+    
+    return index;
+}
+
+
+
+
 
 #endif //GIT_GROUP_PROJECT_UTILS_CPP

@@ -14,4 +14,8 @@ add_executable(Git_Group_Project
         SpellChecker/SpellChecker/Utils.h
         SpellChecker/SpellChecker/MagicDict.cpp
         SpellChecker/SpellChecker/MagicDict.h
-        SpellChecker/SpellChecker/MagicDict.h)
+        SpellChecker/SpellChecker/MagicDict.h
+        SpellChecker/SpellChecker/Trie.cpp
+        SpellChecker/SpellChecker/Trie.h
+        SpellChecker/SpellChecker/Node.cpp
+        SpellChecker/SpellChecker/Node.h)

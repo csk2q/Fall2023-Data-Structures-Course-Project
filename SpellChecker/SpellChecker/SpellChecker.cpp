@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "Utils.h"
-#include "MagicDict.h"
+#include "Trie.h"
 
 using namespace std;
 
@@ -41,8 +41,10 @@ int main()
 		return 1;
 	}
 
+	Trie trie;
+
 	fstream file(wordsFile);
-	vector<string> words;
+	//vector<string> words;
 	//string rawText = Utils::readAllText(file);
 	string line;
 	int maxWordLength = 0;
@@ -53,7 +55,11 @@ int main()
 		int lineLength = line.length();
 		if (lineLength == 0)
 			break;
-		words.push_back(line);
+		
+		//words.push_back(line);
+		if (!trie.addWord(line))
+			cout << "Failed to add word \"" << line << "\"!\n";
+
 		if (lineLength > maxWordLength)
         {
             maxWordLength = lineLength;
@@ -62,8 +68,6 @@ int main()
 	}
     cout << longestWord << "\n";
 	file.close();
-
-	MagicDict MDict(words, maxWordLength);
 
 	string input = " ";
 	while (input.length() > 0)
@@ -74,10 +78,9 @@ int main()
 			cin.ignore();
 		getline(cin, input);
 
-		bool isCorrect = MDict.isValidWord(input);
-		string ans = isCorrect ? "correctly!\n" : " incorrectly!\n";
+		bool isCorrect = trie.isValidWord(input);
+		string ans = isCorrect ? "correctly!\n" : "incorrectly!\n";
 		cout << "That word is spelled " << ans;
-
 	}
 
 	return 0;
