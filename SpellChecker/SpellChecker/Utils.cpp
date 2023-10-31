@@ -56,6 +56,16 @@ int letterToIndex(char letter)
     return index;
 }
 
+static bool isAllAlpha(const string& text)
+{
+    for (int i = 0; i < text.length(); i++)
+    {
+        if(!isalpha(text[i]))
+            return false;
+    }
+    
+    return true;
+}
 
 
 

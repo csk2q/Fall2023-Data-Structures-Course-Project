@@ -19,7 +19,7 @@ bool Trie::isValidWord(string word)
 {
 	trim(word);
 
-	if (word.length() < 1)
+	if (word.length() < 1 || !isAllAlpha(word))
 		return false;
 
 	char letter = word[0];
@@ -47,7 +47,7 @@ bool Trie::addWord(string word)
 {
 	trim(word);
 
-	if (word.length() < 1)
+	if (word.length() < 1 || !isAllAlpha(word))
 		return false;
 
 	char letter = word[0];
@@ -72,6 +72,6 @@ bool Trie::addWord(string word)
 	}
 
 	curNode->isTerminal = true;
-
+	return true;
 }
 

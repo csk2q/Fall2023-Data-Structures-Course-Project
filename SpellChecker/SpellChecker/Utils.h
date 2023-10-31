@@ -16,6 +16,7 @@ using namespace std;
     inline void ltrim(std::string& s);
     static void trim(std::string& s);
     static int letterToIndex(char letter);
+    static bool isAllAlpha(const string& text);
     static string toLower(const string& word);
 
 #include "Utils.cpp"
